@@ -1,0 +1,66 @@
+﻿@model Final.Models.Recipe
+
+@{
+    ViewData["Title"] = "Recipe Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Recipe</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ingredients)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ingredients)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Instructions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Instructions)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+    </dl>
+</div>
+
+<h3>Comments</h3>
+<div>
+    @foreach (var comment in Model.Comments)
+    {
+        <div>
+            <h4>@comment.CommentTitle</h4>
+            <p>@comment.Content</p>
+            <p>Rating: @comment.Rating</p>
+            <p>
+                <a asp-action="Edit" asp-controller="Comment" asp-route-id="@comment.CommentID">Edit</a> |
+                <a asp-action="Delete" asp-controller="Comment" asp-route-id="@comment.CommentID">Delete</a>
+            </p>
+        </div>
+    }
+</div>
+
+<div>
+    <a asp-action="Create" asp-controller="Comment" asp-route-recipeId="@Model.RecipeID" class="btn btn-primary">Leave a Comment</a>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.RecipeID">Edit</a>
+    <a asp-action="Index">Back to List</a>
+</div>
